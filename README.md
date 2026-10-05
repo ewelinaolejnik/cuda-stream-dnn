@@ -58,19 +58,3 @@ Every successful run writes the following hardcoded outputs:
 - `data/results/input_0000.pgm` - a generated noisy input image.
 - `data/results/cudnn_convolution_result_0000.pgm` - the cuDNN convolution
   result for the corresponding input image.
-
-`ProcessingResult::convolution_output_images` holds the results for all 256
-images after `cudnnConvolutionForward` completes. To keep the repository small,
-the program saves image 0 as the committed visual proof instead of writing every
-image in the batch.
-
-`data/results/` is not ignored by Git. Commit these images and a terminal log
-captured with `bash run.sh | Tee-Object execution-log.txt` as proof of execution.
-
-## Short submission description
-
-CUDA Streams cuDNN Image Processor generates hundreds of noisy grayscale images
-and denoises them on an NVIDIA GPU using cuDNN's convolution API with a 3 x 3
-Gaussian filter. Four non-blocking CUDA streams pipeline transfers and cuDNN GPU
-work across image batches. It is a GPU-library implementation, not a CPU-only
-or CPU-multithreaded solution.
