@@ -1,0 +1,51 @@
+CUDA Streams cuDNN Image Processor - installation and execution
+===============================================================
+
+Requirements
+------------
+
+- NVIDIA GPU and a current NVIDIA driver.
+- CUDA Toolkit 12.x or a version compatible with the selected cuDNN release.
+- NVIDIA cuDNN SDK for Windows. It is a separate installation from CUDA Toolkit.
+- CMake 3.24 or later.
+- Visual Studio 2022 with Desktop development with C++ (Windows) or a supported
+  C++ compiler (Linux).
+
+cuDNN setup
+-----------
+
+Install cuDNN from NVIDIA. The CMake configuration needs its root directory -
+the folder containing `include/cudnn.h` and `lib/x64/cudnn.lib` on Windows.
+
+Windows (Git Bash or PowerShell)
+-------------------------------
+
+From the project root, replace the example path with your actual cuDNN folder:
+
+  cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DCUDNN_ROOT="C:/path/to/cudnn"
+  cmake --build build --config Release
+  bash run.sh
+
+Linux
+-----
+
+If cuDNN is installed system-wide, CMake often finds it automatically:
+
+  cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+  cmake --build build --config Release
+  ./run.sh
+
+Otherwise, set CUDNN_ROOT to the cuDNN installation root as in the Windows
+example.
+
+For a cuDNN 9 Windows installation with multiple CUDA variants, CMake selects
+the first compatible variant automatically. To choose one explicitly, add
+`-DCUDNN_CUDA_VARIANT=12.9` to the configure command.
+
+Quick smoke test
+----------------
+
+  bash run.sh --images 16 --width 256 --height 256 --streams 2
+
+All runs write `input_0000.pgm` and `cudnn_convolution_result_0000.pgm` to
+`data/results/`.

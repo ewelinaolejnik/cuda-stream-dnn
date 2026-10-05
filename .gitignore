@@ -1,0 +1,21 @@
+# Build artifacts
+build/
+build-*/
+
+# Compiled executable (keep the course-template placeholder)
+bin/*
+!bin/.gitkeep
+
+# IDE and debugger artifacts
+.vs/
+.idea/
+.vscode/
+*.obj
+*.pdb
+*.ilk
+*.dll
+*.exe
+*.lib
+*.exp
+
+data/results/*
